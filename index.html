@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tanvir Zone - modern online clothing store. Shop men's and women's fashion, new arrivals and essentials.">
+  <title>Tanvir Zone | Online Clothing Store</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- DaisyUI -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+  <!-- Tailwind configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            ink: '#171717',
+            cream: '#f8f6f1',
+            accent: '#c89b5d'
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; }
+    .hero-overlay { background: linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.28), rgba(0,0,0,.05)); }
+    .product-card img { transition: transform .45s ease; }
+    .product-card:hover img { transform: scale(1.05); }
+  </style>
+</head>
+
+<body class="bg-white text-neutral-900">
+
+  <!-- Announcement bar -->
+  <div class="bg-neutral-950 px-4 py-2 text-center text-xs font-medium tracking-wide text-white">
+    Free delivery on orders over ৳2,500 • Cash on Delivery available
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur">
+    <!-- Main navigation -->
+    <div class="navbar mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Mobile menu -->
+      <div class="navbar-start">
+        <div class="dropdown lg:hidden">
+          <!-- Mobile menu button -->
+          <button tabindex="0" class="btn btn-ghost btn-circle" aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+
+          <!-- Mobile menu items -->
+          <ul tabindex="0" class="menu dropdown-content z-[60] mt-3 w-60 rounded-box bg-base-100 p-3 shadow-xl">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#new-arrivals">New Arrivals</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Brand -->
+        <a href="#home" class="text-xl font-extrabold tracking-tight sm:text-2xl">TANVIR<span class="text-accent">ZONE</span></a>
+      </div>
+
+      <!-- Desktop navigation -->
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal gap-1 px-1 font-medium">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#new-arrivals">New Arrivals</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Header actions -->
+      <div class="navbar-end gap-1 sm:gap-2">
+        <!-- Search button -->
+        <button id="searchButton" class="btn btn-ghost btn-circle" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35m1.35-5.15a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/>
+          </svg>
+        </button>
+
+        <!-- Account button -->
+        <button class="btn btn-ghost btn-circle hidden sm:flex" aria-label="Account">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 21a8 8 0 0 0-16 0m12-13a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
+          </svg>
+        </button>
+
+        <!-- Cart button -->
+        <button id="cartButton" class="btn btn-ghost btn-circle relative" aria-label="Shopping cart">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6m3 13h.01M17 21h.01"/>
+          </svg>
+          <span id="cartCount" class="badge badge-sm absolute -right-1 -top-1 hidden bg-neutral-950 text-white">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search panel -->
+    <div id="searchPanel" class="hidden border-t border-neutral-200 bg-white">
+      <!-- Search form wrapper -->
+      <div class="mx-auto flex max-w-3xl gap-2 px-4 py-4">
+        <!-- Search input -->
+        <input id="searchInput" type="search" placeholder="Search shirts, jeans, jackets..." class="input input-bordered w-full" />
+        <!-- Search close button -->
+        <button id="closeSearch" class="btn btn-neutral">Close</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero section -->
+  <section id="home" class="relative min-h-[620px] overflow-hidden bg-neutral-900">
+    <!-- Hero background -->
+    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85" alt="Clothing store" class="absolute inset-0 h-full w-full object-cover">
+    <!-- Hero overlay -->
+    <div class="hero-overlay absolute inset-0"></div>
+
+    <!-- Hero content -->
+    <div class="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-4 py-20 sm:px-6 lg:px-8">
+      <!-- Hero text -->
+      <div class="max-w-2xl text-white">
+        <!-- Hero eyebrow -->
+        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-neutral-200">New season • 2026 collection</p>
+        <!-- Hero heading -->
+        <h1 class="text-5xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">Style that feels like <span class="text-accent">you.</span></h1>
+        <!-- Hero paragraph -->
+        <p class="mt-6 max-w-xl text-base leading-7 text-neutral-200 sm:text-lg">Discover everyday essentials, modern streetwear and timeless pieces made for your wardrobe.</p>
+        <!-- Hero actions -->
+        <div class="mt-8 flex flex-wrap gap-3">
+          <!-- Shop now button -->
+          <a href="#shop" class="btn border-0 bg-white px-7 text-neutral-950 hover:bg-neutral-200">Shop Collection</a>
+          <!-- Explore button -->
+          <a href="#categories" class="btn btn-outline border-white text-white hover:border-white hover:bg-white hover:text-neutral-950">Explore Categories</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category section -->
+  <section id="categories" class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <!-- Section heading -->
+    <div class="mb-8 flex items-end justify-between gap-4">
+      <!-- Heading content -->
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-widest text-accent">Shop by category</p>
+        <h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">Find your everyday style</h2>
+      </div>
+      <!-- Category link -->
+      <a href="#shop" class="hidden font-semibold underline underline-offset-4 sm:block">View all</a>
+    </div>
+
+    <!-- Category grid -->
+    <div id="categoryGrid" class="grid grid-cols-2 gap-3 sm:grid-cols-4"></div>
+  </section>
+
+  <!-- New arrivals section -->
+  <section id="new-arrivals" class="bg-cream py-16">
+    <!-- New arrivals wrapper -->
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Section heading -->
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <!-- Heading content -->
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-widest text-accent">Fresh picks</p>
+          <h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">New arrivals</h2>
+        </div>
+        <!-- Shop link -->
+        <a href="#shop" class="font-semibold underline underline-offset-4">Shop all</a>
+      </div>
+
+      <!-- New arrival product grid -->
+      <div id="newProducts" class="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
+    </div>
+  </section>
+
+  <!-- Promotional banner section -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <!-- Promo banner -->
+    <div class="relative overflow-hidden rounded-3xl bg-neutral-950 px-6 py-12 text-white sm:px-12 lg:px-16">
+      <!-- Promo background decoration -->
+      <div class="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/30 blur-3xl"></div>
+      <!-- Promo content -->
+      <div class="relative max-w-2xl">
+        <!-- Promo label -->
+        <p class="text-sm font-semibold uppercase tracking-widest text-accent">Tanvir Zone essentials</p>
+        <!-- Promo heading -->
+        <h2 class="mt-3 text-3xl font-extrabold sm:text-4xl">Build a wardrobe you actually want to wear.</h2>
+        <!-- Promo paragraph -->
+        <p class="mt-4 leading-7 text-neutral-300">Simple pieces, easy combinations and fresh drops designed for everyday life.</p>
+        <!-- Promo button -->
+        <a href="#shop" class="btn mt-7 border-0 bg-white text-neutral-950 hover:bg-neutral-200">Explore products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop section -->
+  <section id="shop" class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+    <!-- Shop heading -->
+    <div class="mb-8">
+      <!-- Shop title -->
+      <p class="text-sm font-semibold uppercase tracking-widest text-accent">Our collection</p>
+      <h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">Shop all products</h2>
+    </div>
+
+    <!-- Shop controls -->
+    <div class="mb-7 flex flex-col gap-3 rounded-2xl border border-neutral-200 p-3 sm:flex-row sm:items-center sm:justify-between">
+      <!-- Category filters -->
+      <div id="filterButtons" class="flex flex-wrap gap-2"></div>
+
+      <!-- Sort select -->
+      <select id="sortSelect" class="select select-bordered w-full sm:w-48" aria-label="Sort products">
+        <option value="featured">Featured</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="newest">Newest</option>
+      </select>
+    </div>
+
+    <!-- Product grid -->
+    <div id="productGrid" class="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4"></div>
+
+    <!-- Empty state -->
+    <div id="emptyState" class="hidden py-16 text-center">
+      <!-- Empty state title -->
+      <h3 class="text-xl font-bold">No products found</h3>
+      <!-- Empty state text -->
+      <p class="mt-2 text-neutral-500">Try another search or category.</p>
+    </div>
+  </section>
+
+  <!-- Newsletter section -->
+  <section id="contact" class="border-y border-neutral-200 bg-neutral-50">
+    <!-- Newsletter wrapper -->
+    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      <!-- Newsletter layout -->
+      <div class="flex flex-col justify-between gap-8 md:flex-row md:items-center">
+        <!-- Newsletter text -->
+        <div class="max-w-xl">
+          <!-- Newsletter title -->
+          <h2 class="text-2xl font-extrabold sm:text-3xl">Get the latest drops.</h2>
+          <!-- Newsletter paragraph -->
+          <p class="mt-2 text-neutral-600">Join our email list for new arrivals, offers and style updates.</p>
+        </div>
+
+        <!-- Newsletter form -->
+        <form id="newsletterForm" class="flex w-full max-w-lg flex-col gap-2 sm:flex-row">
+          <!-- Newsletter email -->
+          <input id="newsletterEmail" type="email" required placeholder="Your email address" class="input input-bordered w-full bg-white" />
+          <!-- Newsletter button -->
+          <button type="submit" class="btn btn-neutral px-7">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-950 text-neutral-300">
+    <!-- Footer wrapper -->
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4 lg:px-8">
+      <!-- Brand column -->
+      <div class="md:col-span-2">
+        <!-- Footer brand -->
+        <h2 class="text-2xl font-extrabold text-white">TANVIR<span class="text-accent">ZONE</span></h2>
+        <!-- Footer description -->
+        <p class="mt-4 max-w-md leading-7 text-neutral-400">A modern online clothing store focused on simple, wearable fashion and an easy shopping experience.</p>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <!-- Quick links heading -->
+        <h3 class="font-bold text-white">Quick links</h3>
+        <!-- Quick links list -->
+        <ul class="mt-4 space-y-3 text-sm">
+          <li><a href="#home" class="hover:text-white">Home</a></li>
+          <li><a href="#shop" class="hover:text-white">Shop</a></li>
+          <li><a href="#new-arrivals" class="hover:text-white">New Arrivals</a></li>
+          <li><a href="#contact" class="hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer care -->
+      <div>
+        <!-- Customer care heading -->
+        <h3 class="font-bold text-white">Customer care</h3>
+        <!-- Customer care list -->
+        <ul class="mt-4 space-y-3 text-sm">
+          <li><a href="#" class="hover:text-white">Shipping & Delivery</a></li>
+          <li><a href="#" class="hover:text-white">Returns & Exchange</a></li>
+          <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-white">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer bottom -->
+    <div class="border-t border-white/10">
+      <!-- Footer bottom content -->
+      <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <!-- Copyright -->
+        <p>© 2026 Tanvir Zone. All rights reserved.</p>
+        <!-- Payment note -->
+        <p>Secure checkout • Cash on Delivery • SSLCommerz ready</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart drawer -->
+  <dialog id="cartModal" class="modal">
+    <!-- Cart modal box -->
+    <div class="modal-box max-w-lg">
+      <!-- Cart title -->
+      <h3 class="text-xl font-bold">Your cart</h3>
+      <!-- Cart items -->
+      <div id="cartItems" class="mt-5 space-y-3"></div>
+      <!-- Cart total -->
+      <div class="mt-6 flex items-center justify-between border-t pt-5 font-bold">
+        <span>Total</span>
+        <span id="cartTotal">৳0</span>
+      </div>
+      <!-- Checkout button -->
+      <button id="checkoutButton" class="btn btn-neutral mt-5 w-full">Proceed to checkout</button>
+      <!-- Modal close -->
+      <form method="dialog" class="mt-2">
+        <button class="btn btn-ghost w-full">Continue shopping</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Product detail modal -->
+  <dialog id="productModal" class="modal">
+    <!-- Product modal box -->
+    <div class="modal-box max-w-4xl p-0">
+      <!-- Product detail content -->
+      <div id="productDetail" class="grid md:grid-cols-2"></div>
+      <!-- Product modal close -->
+      <form method="dialog" class="absolute right-3 top-3">
+        <button class="btn btn-circle btn-sm bg-white/90">✕</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Main JavaScript -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

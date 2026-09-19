@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <rect width="800" height="1000" fill="#f3f3f3"/>
+  <circle cx="400" cy="360" r="115" fill="#d4d4d4"/>
+  <path d="M180 850c20-210 120-310 220-310s200 100 220 310" fill="#d4d4d4"/>
+  <text x="400" y="930" text-anchor="middle" font-family="Arial" font-size="34" fill="#737373">TANVIR ZONE</text>
+</svg>

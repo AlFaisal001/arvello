@@ -52,7 +52,7 @@ export const products = [
     oldPrice: 850,
     badge: "Popular",
     date: "2026-09-08",
-    image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=85",
+    // image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=85",
     description: "A minimal black tee that works with almost anything."
   },
   {
@@ -74,7 +74,7 @@ export const products = [
     oldPrice: 1790,
     badge: "",
     date: "2026-09-05",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85",
+    // image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85",
     description: "Functional cargo pants with a modern relaxed fit."
   },
   {
